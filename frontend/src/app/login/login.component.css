@@ -1,0 +1,15 @@
+.container {
+    background-color: rgb(155, 204, 247);
+}
+
+.title {
+    font-size: 3rem;
+    margin-bottom: 50px;
+    font-weight: bold;
+
+}
+
+
+form {
+    padding: 100px 200px 100px 200px;
+}
