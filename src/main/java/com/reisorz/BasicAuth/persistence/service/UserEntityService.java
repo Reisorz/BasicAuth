@@ -34,4 +34,9 @@ public class UserEntityService implements IUserEntityService{
     public void deleteUser(UserEntity user) {
         userEntityRepository.delete(user);
     }
+
+    @Override
+    public Optional<UserEntity> findUserEntityByUsername(String username) {
+        return userEntityRepository.findUserEntityByUsername(username);
+    }
 }

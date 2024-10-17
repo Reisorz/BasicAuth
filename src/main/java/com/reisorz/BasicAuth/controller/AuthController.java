@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -23,6 +24,11 @@ public class AuthController {
         userEntityService.saveUser(user);
         System.out.println("User registered: " + user);
         return user;
+    }
+
+    @GetMapping("/get-users")
+    public List<UserEntity> getUsers (){
+        return userEntityService.listUsers();
     }
 
 }

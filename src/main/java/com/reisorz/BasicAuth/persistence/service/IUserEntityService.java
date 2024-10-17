@@ -14,4 +14,6 @@ public interface IUserEntityService {
     public UserEntity saveUser(UserEntity user);
 
     public void deleteUser(UserEntity user);
+
+    Optional<UserEntity> findUserEntityByUsername(String username);
 }
