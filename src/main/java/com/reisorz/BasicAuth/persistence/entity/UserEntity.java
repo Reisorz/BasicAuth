@@ -24,6 +24,8 @@ public class UserEntity {
     @Column(unique = true)
     private String username;
     private String password;
+    private String name;
+    private String email;
 
     private boolean isEnabled;
     private boolean accountNoExpired;

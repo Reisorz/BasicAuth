@@ -1,14 +1,10 @@
-.container {
-    background-color: rgb(110, 228, 236);
+.principal-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
 }
 
-.title {
-    font-size: 3rem;
-    margin-bottom: 50px;
-    font-weight: bold;
-
-}
-
-form {
-    padding: 100px 200px 100px 200px;
+.register-form-card {
+    width: 50%;
+    
 }
