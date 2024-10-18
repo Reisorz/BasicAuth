@@ -1,6 +1,7 @@
 package com.reisorz.BasicAuth.controller;
 
 import com.reisorz.BasicAuth.persistence.entity.UserEntity;
+import com.reisorz.BasicAuth.persistence.service.UserDetailsServiceImpl;
 import com.reisorz.BasicAuth.persistence.service.UserEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -18,6 +19,9 @@ public class AuthController {
     @Autowired
     private UserEntityService userEntityService;
 
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
+
 
     @PostMapping("/register")
     public UserEntity registerUser(@RequestBody UserEntity user){
@@ -26,9 +30,10 @@ public class AuthController {
         return user;
     }
 
-    @GetMapping("/get-users")
+    @GetMapping("/get-users-list")
     public List<UserEntity> getUsers (){
         return userEntityService.listUsers();
     }
+
 
 }
