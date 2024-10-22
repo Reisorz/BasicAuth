@@ -18,6 +18,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -27,15 +30,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
+                .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests( http -> {
                     //Public endpoints
-                    http.requestMatchers(HttpMethod.POST, "/basic-auth/register").permitAll();
+                    http.requestMatchers(HttpMethod.POST, "/basic-auth/register").anonymous();
+                    http.requestMatchers(HttpMethod.GET, "/basic-auth/get-role-by-id/{id}").anonymous();
 
                     //Private endpoints
-                    http.requestMatchers(HttpMethod.GET, "/basic-auth/get-users").hasAnyRole("ADMIN","USER" );
+                    http.requestMatchers(HttpMethod.GET, "/basic-auth/get-users-list").hasAnyRole("ADMIN","USER" );
                     http.requestMatchers(HttpMethod.PUT, "/basic-auth/edit-user").hasAnyRole("ADMIN");
 
                     //Rest of endpoints - Not specified
@@ -43,6 +48,21 @@ public class SecurityConfig {
                 })
                 .build();
     }
+
+    @Bean
+    public CorsFilter corsFilter() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.addAllowedOrigin("http://localhost:4200");  // Origin definition
+        config.addAllowedMethod("*");  // Allow all Http methods (PUT, POST, GET, etc.)
+        config.addAllowedHeader("*");  // Allow all headers
+        config.setAllowCredentials(true);  // Allows credentials
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);  // Aplicar configuración CORS a todas las rutas
+
+        return new CorsFilter(source);
+    }
+
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
