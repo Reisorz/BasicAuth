@@ -1,0 +1,98 @@
+<div class="principal-container">
+    <mat-card class="register-form-card" appearance="outlined">
+      <mat-card-content>
+        <form class="register-form" [formGroup]="updateForm" (ngSubmit)="editUser()">
+          <mat-card-header class="header">Update</mat-card-header>
+    
+          <mat-form-field class="username" >
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Username" formControlName="username"/>
+            <mat-hint></mat-hint>
+            @if (usernameFormControl.hasError('required')) {
+              <mat-error>Username is <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+    
+          <mat-form-field class="example-full-width" >
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name Surname" formControlName="name"/>
+            <mat-hint></mat-hint>
+            @if (nameFormControl.hasError('required')) {
+              <mat-error>Name is <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+    
+          <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput formControlName="email"  placeholder="email@email.com">
+            <mat-hint></mat-hint>
+            @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+              <mat-error>Please enter a valid email address</mat-error>
+            }
+            @if (emailFormControl.hasError('required')) {
+              <mat-error>Email is <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Roles</mat-label>
+            <mat-select formControlName="roles" multiple [compareWith]="compareRoles">
+              @for (role of rolesList; track role) {
+                <mat-option [value]="role">{{role.roleEnum}}</mat-option>
+              }
+            </mat-select>
+            @if (rolesFormControl.hasError('required')) {
+              <mat-error>Roles are <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+
+          <mat-card class="radial-button-cards">
+            <mat-radio-group aria-label="Select an option" formControlName="accountNonExpired">
+              <mat-label>Non expired account?</mat-label>
+              <div>
+                <mat-radio-button [value]="true">True</mat-radio-button>
+                <mat-radio-button [value]="false">False</mat-radio-button>
+              </div>
+            </mat-radio-group>
+          </mat-card>
+
+          <mat-card class="radial-button-cards">
+            <mat-radio-group aria-label="Select an option" formControlName="credentialsNonExpired">
+              <mat-label>Non expired credentials?</mat-label>
+              <div>
+                <mat-radio-button [value]="true">True</mat-radio-button>
+                <mat-radio-button [value]="false">False</mat-radio-button>
+              </div>
+            </mat-radio-group>
+          </mat-card>
+
+          <mat-card class="radial-button-cards">
+            <mat-radio-group aria-label="Select an option" formControlName="accountNonLocked">
+              <mat-label>Non locked account?</mat-label>
+              <div>
+                <mat-radio-button [value]="true">True</mat-radio-button>
+                <mat-radio-button [value]="false">False</mat-radio-button>
+              </div>
+            </mat-radio-group>
+          </mat-card>
+
+          <mat-card class="radial-button-cards">
+            <mat-radio-group aria-label="Select an option" formControlName="enabled">
+              <mat-label>Enabled?</mat-label>
+              <div>
+                <mat-radio-button [value]="true">True</mat-radio-button>
+                <mat-radio-button [value]="false">False</mat-radio-button>
+              </div>
+            </mat-radio-group>
+          </mat-card>
+          
+          
+          <div>
+            <button class="button-register" type="submit" mat-flat-button mat-dialog-close>Save changes</button>
+            <button class="button-back" mat-flat-button mat-dialog-close >Cancel</button>
+          </div>
+    
+        </form>
+      </mat-card-content>
+    </mat-card>
+    </div>

@@ -1,0 +1,52 @@
+
+
+.register-form-card {
+    width: 100%;
+    background-color: #A4C3B2;
+    border: none;
+    
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    font-size: 3rem;
+    margin-bottom: 50px;
+    font-weight: bold;
+}
+
+.mat-mdc-unelevated-button.button-register {
+    background-color: #6b9080;
+    margin-right: 10px;
+    margin-left: 50px;
+}
+
+.mat-mdc-unelevated-button.button-back {
+    background-color: #9e5656;
+    margin-right: 10px;
+}
+.mat-mdc-form-field {
+  margin-bottom: 15px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.radial-button-cards{
+    padding: 5px;
+    margin-bottom: 15px;
+    margin-left: 50px;
+    margin-right: 50px;
+    background-color: #CCE3DE;
+}
+
+mat-radio-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+

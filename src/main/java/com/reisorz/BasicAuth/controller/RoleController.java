@@ -5,6 +5,8 @@ import com.reisorz.BasicAuth.persistence.service.RoleEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("basic-auth")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -16,5 +18,10 @@ public class RoleController {
     @GetMapping("/get-role-by-id/{id}")
     public RoleEntity getRoleById(@PathVariable Long id) {
         return roleEntityService.searchRoleById(id);
+    }
+
+    @GetMapping("/get-roles")
+    public List<RoleEntity> getRoles() {
+        return  roleEntityService.listRoles();
     }
 }

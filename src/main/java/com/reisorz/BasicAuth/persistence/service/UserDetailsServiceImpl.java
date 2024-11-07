@@ -34,9 +34,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return new User(userEntity.getUsername(),
                 userEntity.getPassword(),
                 userEntity.isEnabled(),
-                userEntity.isAccountNoExpired(),
-                userEntity.isCredentialNoExpired(),
-                userEntity.isAccountNoLocked(),
+                userEntity.isAccountNonExpired(),
+                userEntity.isCredentialsNonExpired(),
+                userEntity.isAccountNonLocked(),
                 authorityList
         );
     }

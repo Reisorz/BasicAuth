@@ -1,0 +1,70 @@
+<div class="principal-container">
+  <div class="second-container">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Id Column -->
+    <ng-container matColumnDef="userId">
+      <th mat-header-cell *matHeaderCellDef> Id </th>
+      <td mat-cell *matCellDef="let user"> {{user.userId}} </td>
+    </ng-container>
+      
+    <!-- Username Column -->
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef> Username </th>
+      <td mat-cell *matCellDef="let user"> {{user.username}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let user"> {{user.name}} </td>
+    </ng-container>
+  
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let user"> {{user.email}} </td>
+    </ng-container>
+  
+    <!-- Role Column -->
+    <ng-container matColumnDef="roles">
+      <th mat-header-cell *matHeaderCellDef> Role </th>
+      <td mat-cell *matCellDef="let user"> 
+      
+        <span *ngFor="let role of user.roles; let i = index">
+          {{role.roleEnum ===''? 'Unassigned':role.roleEnum}}<ng-container *ngIf="i < user.roles.length - 1">, </ng-container>
+        </span>
+      
+      </td>
+    </ng-container>
+
+    <!-- Active Column -->
+    <ng-container matColumnDef="enabled">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let user"> {{user.enabled?'Active':'Inactive'}} </td>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let user"> 
+        <button class="button-update" (click)="updateUser(user.userId)"  mat-flat-button >Update</button> 
+        <button class="button-delete" (click)="deletePopUp(user.userId)"  mat-flat-button >Delete</button> 
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator class="paginator" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]"
+  showFirstLastButtons
+  aria-label="Select page of periodic elements">
+  </mat-paginator>
+
+  </div>
+</div>
+  

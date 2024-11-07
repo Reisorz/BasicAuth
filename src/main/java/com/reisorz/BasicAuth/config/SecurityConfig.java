@@ -32,16 +32,23 @@ public class SecurityConfig {
         return httpSecurity
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-                .httpBasic(Customizer.withDefaults())
+                .httpBasic(Customizer.withDefaults()) //Basic Authentication
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests( http -> {
                     //Public endpoints
                     http.requestMatchers(HttpMethod.POST, "/basic-auth/register").anonymous();
                     http.requestMatchers(HttpMethod.GET, "/basic-auth/get-role-by-id/{id}").anonymous();
+                    http.requestMatchers(HttpMethod.GET, "/basic-auth/get-user-by-username/{username}").anonymous();
+                    http.requestMatchers(HttpMethod.POST, "/basic-auth/login-pass").anonymous();
+
+
 
                     //Private endpoints
                     http.requestMatchers(HttpMethod.GET, "/basic-auth/get-users-list").hasAnyRole("ADMIN","USER" );
                     http.requestMatchers(HttpMethod.PUT, "/basic-auth/edit-user").hasAnyRole("ADMIN");
+                    http.requestMatchers(HttpMethod.GET, "/basic-auth/get-user-by-id/{userId}").hasAnyRole("ADMIN");
+                    http.requestMatchers(HttpMethod.GET, "/basic-auth/get-roles").hasAnyRole("ADMIN");
+                    http.requestMatchers(HttpMethod.DELETE, "/basic-auth/delete-user/{id}").hasAnyRole("ADMIN");
 
                     //Rest of endpoints - Not specified
                     http.anyRequest().denyAll();
@@ -49,6 +56,7 @@ public class SecurityConfig {
                 .build();
     }
 
+    //Config to allow crossOrigin
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
@@ -58,7 +66,7 @@ public class SecurityConfig {
         config.setAllowCredentials(true);  // Allows credentials
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);  // Aplicar configuración CORS a todas las rutas
+        source.registerCorsConfiguration("/**", config);  // Applies CORS configuration to all routes
 
         return new CorsFilter(source);
     }
@@ -80,8 +88,8 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
 
-        //return new BCryptPasswordEncoder();
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
+        //return NoOpPasswordEncoder.getInstance();
     }
 
 

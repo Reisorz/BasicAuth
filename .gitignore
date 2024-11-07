@@ -1,0 +1,14 @@
+# Ignorar node_modules
+node_modules/
+
+# Ignorar Angular build output
+dist/
+.angular/
+
+# Ignorar Maven y Gradle build output
+target/
+build/
+
+# Ignorar cachés de npm y Angular
+.cache
+.npm/

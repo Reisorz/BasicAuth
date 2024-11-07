@@ -1,0 +1,36 @@
+
+
+.register-form-card {
+    width: 100%;
+    background-color: #A4C3B2;
+    border: none;
+    
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 2rem;
+    margin: 30px;
+    font-weight: bold;
+}
+
+.mat-mdc-unelevated-button.button-yes {
+    background-color: #6b9080;
+    margin: 20px;
+    height: 50px;
+    width: 150px;
+    font-size: 1.5rem;
+}
+
+.mat-mdc-unelevated-button.button-no {
+    background-color: #9e5656;
+    margin: 20px;
+    height: 50px;
+    width: 150px;
+    font-size: 1.5rem;
+}
+

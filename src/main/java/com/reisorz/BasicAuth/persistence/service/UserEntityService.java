@@ -31,8 +31,8 @@ public class UserEntityService implements IUserEntityService{
     }
 
     @Override
-    public void deleteUser(UserEntity user) {
-        userEntityRepository.delete(user);
+    public void deleteUser(Long userId) {
+        userEntityRepository.findById(userId).ifPresent(user -> userEntityRepository.delete(user));
     }
 
     @Override

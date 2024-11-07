@@ -2,17 +2,59 @@
 <div class="principal-container">
 <mat-card class="register-form-card" appearance="outlined">
   <mat-card-content>
-    <form class="example-form">
-      <mat-form-field class="example-full-width">
-        <mat-label>Favorite food</mat-label>
-        <input matInput placeholder="Ex. Pizza" value="Sushi" />
+    <form class="register-form" [formGroup]="registerForm" (ngSubmit)="registerUser()">
+      <mat-card-header class="header">Register</mat-card-header>
+
+      <mat-form-field class="username" >
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="Username" formControlName="username" name="username" [formControl]="usernameFormControl" [(ngModel)]="user.username" />
+        <mat-hint></mat-hint>
+        @if (usernameFormControl.hasError('required')) {
+          <mat-error>Username is <strong>required</strong></mat-error>
+        }
       </mat-form-field>
 
-      <mat-form-field class="example-full-width">
-        <mat-label>Leave a comment</mat-label>
-        <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+      <mat-form-field class="example-full-width" >
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Name Surname" formControlName="name" name="name" [formControl]="nameFormControl" [(ngModel)]="user.name" />
+        <mat-hint></mat-hint>
+        @if (nameFormControl.hasError('required')) {
+          <mat-error>Name is <strong>required</strong></mat-error>
+        }
       </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput [formControl]="emailFormControl" name="email"  placeholder="email@email.com" [(ngModel)]="user.email">
+          <mat-hint></mat-hint>
+          @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+            <mat-error>Please enter a valid email address</mat-error>
+          }
+          @if (emailFormControl.hasError('required')) {
+            <mat-error>Email is <strong>required</strong></mat-error>
+          }
+        </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Password*</mat-label>
+        <input type="password" matInput placeholder="Password" [formControl]="passwordFormControl" formControlName="password" name="password" [(ngModel)]="user.password" />
+        <mat-hint></mat-hint>
+        @if (passwordFormControl.hasError('pattern') && !passwordFormControl.hasError('required')) {
+          <mat-error>Password must be <strong>8 characters</strong> minimum and contain at least a <strong>lowercase</strong> letter, an <strong>uppercase</strong> letter, a <strong>number</strong> and a <strong>special character.</strong>.</mat-error>
+        }
+        @if (passwordFormControl.hasError('required')) {
+          <mat-error>Password is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+      
+      <div>
+        <button class="button-register" type="submit" mat-flat-button>Register</button>
+        <a class="button-back" routerLink="/login" mat-flat-button >Back to Login</a>
+      </div>
+
     </form>
   </mat-card-content>
 </mat-card>
 </div>
+
+

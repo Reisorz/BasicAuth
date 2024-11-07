@@ -13,7 +13,7 @@ public interface IUserEntityService {
 
     public UserEntity saveUser(UserEntity user);
 
-    public void deleteUser(UserEntity user);
+    public void deleteUser(Long userId);
 
     Optional<UserEntity> findUserEntityByUsername(String username);
 }

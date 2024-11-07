@@ -1,0 +1,27 @@
+.principal-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.second-container {
+    width: 50vw;
+}
+
+table {
+    background-color: #CCE3DE;
+}
+
+.paginator {
+    background-color: #CCE3DE;
+}
+
+.mat-mdc-unelevated-button.button-update {
+    background-color: #EE964B;
+    margin-right: 10px;
+}
+
+.mat-mdc-unelevated-button.button-delete {
+    background-color: #9e5656;
+    margin-right: 10px;
+}

@@ -1,8 +1,12 @@
-<div class="principal-container">
+<div class="principal-container" >
 <mat-card class="navbar" >
-  <mat-card-content>
-    
-
+  <mat-card-content class="navbar-options">
+    <div class="nav-title"> Basic Auth </div>
+    <div class="login-register-div">
+      <a class="no-decoration-link" routerLink="/login" *ngIf="login"> Login</a>
+      <a class="no-decoration-link" routerLink="/login" *ngIf="logout"> Logout</a>
+      <a class="no-decoration-link" routerLink="/register" *ngIf="login"> Register</a>
+    </div>
   </mat-card-content>
 </mat-card>
 </div>
